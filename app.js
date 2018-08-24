@@ -9,6 +9,8 @@ const mongoose = require("mongoose");
 const config = require("./config");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/post");
+const staticAsset = require("static-asset");
+
 mongoose
   .connect(
     config.mongoURI,
@@ -22,6 +24,7 @@ mongoose
   });
 
 app.set("view engine", "ejs");
+app.use(staticAsset(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/js",
